@@ -5,6 +5,12 @@ export default {
   context: {
     title: '测试项目'
   },
-  exportStatic: {},
+  // hashHistory:true, //加上这个是在地址栏#
+  exportStatic: true,
+  // "outputPath":"file:E:/temp/test-chess/",
+  // exportStatic: {},
+  "pages": {
+    "/news": { document: "./src/pages/news-document.ejs" }
+  }
 };
 

@@ -2,11 +2,18 @@ import * as newsService from '../services/newsService';
 export default {
   namespace: 'news',
   state: {
-    totalElements: 0
+    datas: [],
+    item:{},
+    totalElements: 0,
+    showVisible: false
   },
   reducers: {
     listPage(state, {payload: data}) {
-      return {...state, totalElements: data.data.size};
+      console.log("datas:::", data);
+      return {...state, totalElements: data.data.size, datas: data.data.datas};
+    },
+    modifyState(state, {payload: options}) {
+      return {...state, ...options};
     }
   },
   effects: {

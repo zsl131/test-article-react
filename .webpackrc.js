@@ -7,12 +7,17 @@ export default {
       "pathRewrite": { "^/api" : "" }
     },
   },*/
-  "publicPath": "/static/",
+  // "publicPath": "/static/",
   "proxy": {
     "/api": {
       "target": "http://localhost:8888/api/",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
+    },
+    "/public": {
+      "target": "http://localhost:8888/api/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/public" : "" }
     },
     "/v2_api": {
       "target": "http://jsonplaceholder.typicode.com/",

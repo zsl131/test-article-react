@@ -1,54 +1,50 @@
-import { connect } from 'dva'
-// import queryString from 'query-string'
-import { routerRedux } from 'dva/router'
+import {connect} from 'dva'
+import {Button, Table, Icon} from 'antd';
+import MyModal from './components/MyModal';
+
 const News = ({
   news,
-  loading,location,
+  loading,
+  location,
   dispatch
 }) => {
 
-  // location.query = JSON.parse(location.search);
-
-  console.log("----", location.query);
-
-  const {query, pathname } = location;
-
-  const operatorOpts = {
-    onAdd() {
-      // console.log("UserIndex operator");
-      dispatch({ type: 'role/setModalVisible', payload: {addVisible: true}});
+  const columns = [{
+    title: '标题',
+    dataIndex: 'title'
+  }, {
+    title: "操作",
+    render: (text, record) => {
+      return (
+        <span><Button icon="edit" onClick={()=>handlerClick(record)} type="primary">点击</Button></span>
+      );
     }
+  }]
+
+  const handlerClick = (record) => {
+    console.log("record:",record);
+    dispatch({ type: 'news/modifyState', payload: {item: record, showVisible: true}});
   }
 
-  const handleRefresh = (newQuery) => {
-    dispatch(routerRedux.push({
-      pathname,
-      search: JSON.stringify({
-        ...query,
-        ...newQuery,
-      }),
-    }));
-  }
-
-  const listOpts = {
-    dataSource: news.datas,
-    loading: loading.models.role,
-    location,
-    totalElement: news.totalElements,
-    onDelConfirm: (id) => {
-      dispatch({ type: 'role/deleteObj', payload: id });
+  const showOpts = {
+    visible: news.showVisible,
+    title: '查看新闻',
+    cancelText: '取消',
+    okText:'确定',
+    okType:'danger',
+    onCancel: ()=>{
+      dispatch({type:'news/modifyState', payload:{showVisible: false}})
     },
-    onPageChange: (page) => {
-    },
-    onUpdate: (id) => {
-      // console.log("update::", id);
-      dispatch({ type: 'role/update', payload: id });
-    },
+    onOk: ()=> {
+      alert("----");
+    }
   }
 
   return (
     <div>
       <h1>新闻:::：({news.totalElements})</h1>
+      <Table dataSource={news.datas}  rowKey="id" columns={columns} />
+      {news.showVisible && <MyModal item={news.item} {...showOpts}/>}
     </div>
   );
 }

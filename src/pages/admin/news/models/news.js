@@ -26,7 +26,7 @@ export default {
   subscriptions: {
     setup({history, dispatch}) {
       return history.listen((location)=> {
-        if(location.pathname === '/news') {
+        if(location.pathname === '/admin/news') {
           console.log(location);
           dispatch({type:'listObj', payload: location.query});
         }

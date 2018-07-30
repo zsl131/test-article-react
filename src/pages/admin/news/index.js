@@ -43,7 +43,7 @@ const News = ({
   return (
     <div>
       <h1>新闻:::：({news.totalElements})</h1>
-      <Table dataSource={news.datas}  rowKey="id" columns={columns} />
+      <Table dataSource={news.datas} loading={loading.models.news} rowKey="id" columns={columns} />
       {news.showVisible && <MyModal item={news.item} {...showOpts}/>}
     </div>
   );

@@ -1,4 +1,4 @@
-import request from '../../../utils/request';
+import request from '../../../../utils/request';
 import axios from 'axios';
 function list(query) {
   const opts = {

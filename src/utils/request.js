@@ -1,4 +1,5 @@
 import fetch from 'dva/fetch';
+import configApi from './configApi';
 
 function parseJSON(response) {
   return response.json();
@@ -14,20 +15,26 @@ function checkStatus(response) {
   throw error;
 }
 
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
-export default function request(url, options) {
-  console.log("oldUrl:",url);
-  // url = "http://localhost:8888"+url;
-  // console.log("newUrl:", url);
-  return fetch(url, options)
+
+export default function request(apiCode, params, isBase, options) {
+
+  // console.log("configApi", configApi);
+
+  const defaultOption = {
+    method: 'GET',
+    headers: {
+      'auth-token': configApi.authToken,
+      'api-code': apiCode
+    }
+  }
+  params = JSON.stringify(params);
+  console.log(params, configApi.api.baseRequest+params);
+  // console.log("encode after aes", params);
+  return fetch(isBase?configApi.api.baseRequest+params : configApi.api.queryOrSubmit+params, options || defaultOption)
     .then(checkStatus)
     .then(parseJSON)
+    // .then(checkDatas)
     .then(data => ({ data }))
     .catch(err => ({ err }));
+    // .catch(catchError);
 }

@@ -13,6 +13,10 @@ export default {
   reducers: {
     modifyState(state, {payload: options}) {
       return {...state, ...options};
+    },
+    onUpdatePage(state, {payload: data}) {
+      console.log(data);
+      return {...state, item: data.data.datas, updateVisible: true};
     }
   },
   effects: {
@@ -39,6 +43,17 @@ export default {
         message.success("验证通过");
         console.log(data.data.datas);
       }
+    },
+    *deleteObj({payload: id}, {call}) {
+      const data = yield call(userService.deleteObj, {id});
+      console.log(data);
+      if(data) {
+        message.success(data.data.datas);
+      }
+    },
+    *onUpdate({payload: obj}, {call, put}) {
+      const data = yield call(userService.loadOne, {id: obj.id});
+      yield put({type: "onUpdatePage", payload: data});
     }
   },
   subscriptions: {

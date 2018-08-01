@@ -12,8 +12,18 @@ function login(params) {
   return request("userService.login", params, true);
 }
 
+function deleteObj(id) {
+  return request("userService.delete", id, true);
+}
+
+function loadOne(id) {
+  return request("userService.loadOne", id, true);
+}
+
 export {
   findAll,
   saveOrUpdate,
   login,
+  deleteObj,
+  loadOne,
 }

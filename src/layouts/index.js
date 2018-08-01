@@ -1,7 +1,13 @@
 import React from 'react';
-import { Layout,Affix,Menu, Icon } from 'antd';
+import { Layout,Affix,Menu, Icon, LocaleProvider } from 'antd';
 import Link from 'umi/link';
 // import {Link} from 'react-router-dom';
+
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+
+moment.locale('zh-cn');
 
 const { Content } = Layout;
 
@@ -35,6 +41,7 @@ class MainLayout extends React.Component {
     }
 
     return (
+      <LocaleProvider locale={zhCN}>
       <Layout >
         <Affix>
           <Menu
@@ -65,6 +72,7 @@ class MainLayout extends React.Component {
         </Content>
 
       </Layout>
+      </LocaleProvider>
     );
   }
 }

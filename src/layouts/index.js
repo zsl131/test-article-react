@@ -45,7 +45,7 @@ class MainLayout extends React.Component {
       <Layout >
         <Affix>
           <Menu
-            onClick={this.handleClick}
+            onClick={handleClick}
             selectedKeys={[this.state.current]}
             mode="horizontal"
           >
@@ -66,6 +66,9 @@ class MainLayout extends React.Component {
                 </Menu.Item>
               </MenuItemGroup>
             </SubMenu>
+            <Menu.Item key="message">
+              <Link to="/admin/messages"><Icon type="message" />留言管理</Link>
+            </Menu.Item>
           </Menu>
         </Affix>
         <Content style={{"background": "#f0f2f5"}}>{props.children}

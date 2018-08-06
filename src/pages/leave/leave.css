@@ -1,0 +1,11 @@
+.listHeader {
+  border-bottom: 1px #40a9ff solid; float:left; width:100%;
+  padding-bottom: 10px;
+}
+.title {
+  float:left;
+}
+
+.operatorBtn {
+  float:right;
+}

@@ -28,7 +28,7 @@ const ListLeave = ({
       return (
         <span>
         <Button icon="edit" onClick={() => handle(record)} type="primary">修改</Button>
-        <Popconfirm title={`是否删除${record.nickname}?`} onConfirm={() => handlerDel(record)}>
+        <Popconfirm title={`是否删除${record.applicant}?`} onConfirm={() => handlerDel(record)}>
     <Button icon="close" type="danger">删除</Button>
     </Popconfirm>
         </span>
@@ -39,7 +39,7 @@ const ListLeave = ({
     render: (cord) => {
       return (
         <div>
-          <Button icon="edit" onClick={()=>hand(cord)} type="primary">回复</Button>
+          <Button icon="edit" onClick={()=>hand(cord)} type="primary">申请</Button>
         </div>
       );
     }

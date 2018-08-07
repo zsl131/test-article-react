@@ -28,13 +28,10 @@ export default class UpdateModal extends React.Component {
           <Form >
             {getFieldDecorator("id")(<Input type="hidden"/>)}
             <FormItem>
-              {getFieldDecorator("applicant", {rules:[{required: true, message: "请输入申请人"}]})(<Input placeholder="输入申请人"/>)}
+              {getFieldDecorator("approval", {rules:[{required: true, message: "请输入审批人"}]})(<Input placeholder="输入审批人"/>)}
             </FormItem>
             <FormItem>
-              {getFieldDecorator("reason", {rules:[{required: true, message: "请假原因"}]})(<Input placeholder="原因"/>)}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator("fate")(<Input placeholder="输入天数"/>)}
+              {getFieldDecorator("result", {rules:[{required: true, message: "同意与否"}]})(<Input placeholder="是否同意"/>)}
             </FormItem>
           </Form>
         </Modal>

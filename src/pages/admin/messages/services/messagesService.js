@@ -1,4 +1,4 @@
-import request from '../../../utils/request';
+import request from '../../../../utils/request';
 function listMessage(query){
   return request("messagesService.list",query);
 }

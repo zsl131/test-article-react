@@ -25,7 +25,7 @@ const Messages = ({
   const updateOpts = {
     visible: messages.updateVisible,
     title: "修改用户[" + messages.item.author + "]",
-    user: messages.item,
+    messages: messages.item,
     onCancel: () => {
       dispatch({type: 'messages/modifyState', payload: {updateVisible: false}});
     },
@@ -39,6 +39,10 @@ const Messages = ({
   }
   const listOpts = {
     dataSource:messages.datas,
+    onDel: (record) => {
+      console.log(record);
+      dispatch({type: 'messages/delete', payload: record.id}).then(()=>handleRefresh());
+    }
   }
   const handleAdd =()=>{
     dispatch({type:'messages/modifyState',payload:{addVisible:true}});

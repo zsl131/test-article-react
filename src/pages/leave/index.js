@@ -55,7 +55,8 @@ const Leave = ({
     onUpdate:(values) => {
       console.log(values);
       dispatch({type:'leave/addOrUpdate', payload: values}).then(()=> {
-        dispatch({type:'leave/modifyState', payload: {updateVisible: false}}).then(()=> {handleRefresh();});
+        dispatch({type:'leave/modifyState', payload: {updateVisible: false}});
+        handleRefresh();
       });
     }
   }

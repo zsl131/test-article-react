@@ -21,30 +21,28 @@ export default {
     *listMessage({payload:query},{call,put}){
       const data = yield call(messagesService.listMessage,query);
       console.log(data);
-      yield put ({type:'modifyState',payload:{totalElements:data.data.result.size,datas:data.data.result.datas}});
+      yield put ({type:'modifyState',payload:{totalElements:data.size, datas:data.datas}});
     },
     *delete({payload:id},{call}){
       const data = yield call(messagesService.deleteMessage,{id});
       console.log(data);
       if(data){
-        message.success(data.data.result.datas);
+        message.success(data.message);
       }
     },
     *saveOrUpdate({payload:message},{call,put}){
       const data = yield call(messagesService.addOrUpdateMessage,message);
       console.log("saveOrUpdate",data);
-      if(data.data.data.result.size===0){
-        message.err(data.data.result.datas);
-      }else if(data.data.size ===1) {
-        message.success(data.data.result.datas);
-        yield put({type: 'listMessage', payload: {addVisible: false}});
+      if(data) {
+        message.success("添加成功");
+        yield put({type: 'modifyState', payload: {addVisible: false}});
       }
     }
   },
   subscriptions:{
     setup({history,dispatch}){
       return history.listen((location)=>{
-        if(location.pathname==='/messages'){
+        if(location.pathname==='/admin/messages'){
           dispatch({type:'listMessage',payload:location.query});
         }
       })

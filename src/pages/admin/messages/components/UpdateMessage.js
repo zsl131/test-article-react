@@ -4,7 +4,7 @@ const FormItem = Form.Item;
 @Form.create()
 export default class UpdateMessage extends React.Component{
   state = {
-    user: this.props.messages
+    messages: this.props.messages
   }
   componentDidMount(){
     const{setFieldsValue}=this.props.form;

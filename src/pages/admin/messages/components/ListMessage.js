@@ -6,11 +6,13 @@ const ListMessage = ({
   messages,
   dispatch,
   location,
+   onDel,
   ...listOpts,
 })=> {
   const handleDel=(record)=> {
-    console.log(record);
-    dispatch({type: 'messages/delete', payload: record.id});
+    // console.log(record);
+    // dispatch({type: 'messages/delete', payload: record.id});
+    onDel(record);
   }
   const handleModify = (record) => {
     console.log(record);
@@ -28,7 +30,6 @@ const ListMessage = ({
     }, {
       title: '操作',
       render: (record) => {
-        console.log(record);
         return (
           <div>
             <Button type="primary" icon ="edit">回复</Button>

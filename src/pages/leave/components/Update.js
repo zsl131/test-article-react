@@ -6,7 +6,16 @@ const FormItem = Form.Item;
 @Form.create()
 export default class UpdateModal extends React.Component {
 
+  state = {
+    leave: this.props.leave
+  }
 
+  componentDidMount() {
+    console.log(this.props);
+    const {setFieldsValue} = this.props.form;
+    console.log(this.state.leave);
+    setFieldsValue({"leaveId": this.state.leave.id});
+  }
 
   render() {
 
@@ -26,7 +35,7 @@ export default class UpdateModal extends React.Component {
       <div>
         <Modal {...this.props} onOk={handleOk}>
           <Form >
-            {getFieldDecorator("id")(<Input type="hidden"/>)}
+            {getFieldDecorator("leaveId")(<Input type="hidden"/>)}
             <FormItem>
               {getFieldDecorator("approval", {rules:[{required: true, message: "请输入审批人"}]})(<Input placeholder="输入审批人"/>)}
             </FormItem>

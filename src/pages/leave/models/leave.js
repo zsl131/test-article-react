@@ -24,7 +24,7 @@ export default {
     *list({payload:query},{call,put}) {
       const data = yield call(leaveService.list,query);
       console.log(data);
-      yield put({type:'modifyState',payload:{totalElements:data.data.result.size,leaveList:data.data.result.datas}});
+      yield put({type:'modifyState',payload:{totalElements:data.size,leaveList:data.datas, verifyElements: data.verifySize, verifyList: data.verifyList}});
     },
     *addOrUpdate({payload:obj},{call,put}) {
       const data = yield call(leaveService.addOrUpdate,obj);

@@ -1,7 +1,6 @@
 import React from 'react';
 import {Table,Button,Popconfirm} from 'antd';
 import {connect} from 'dva';
-import {routerRedux} from 'dva/router';
 const ListMessage = ({
   loading,
   messages,
@@ -11,9 +10,11 @@ const ListMessage = ({
 })=> {
   const handleDel=(record)=> {
     console.log(record);
-    dispatch({type: 'messages/delete', payload: record.id})
-
-    ;
+    dispatch({type: 'messages/delete', payload: record.id});
+  }
+  const handleModify = (record) => {
+    console.log(record);
+    dispatch({type: 'messages/modifyState', payload: {item: record, updateVisible: true}});
   }
     const columns = [{
       title: '作者',
@@ -31,6 +32,7 @@ const ListMessage = ({
         return (
           <div>
             <Button type="primary" icon ="edit">回复</Button>
+            <Button type="primary" icon ="edit"onClick={()=>handleModify(record)} >修改</Button>
             <Popconfirm Popconfirm title={`是否删除${record.author}?`} onConfirm={()=>handleDel(record)}>
               <Button type="danger" icon="close">删除</Button>
             </Popconfirm>

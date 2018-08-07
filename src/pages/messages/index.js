@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'dva';
-import {Icon,Button,Table,Popconfirm} from 'antd';
+import {Icon,Button} from 'antd';
 import AddModal from './components/AddModal';
 import ListMessage from './components/ListMessage';
+import UpdateMessage from './components/UpdateMessage';
 import styles from './messages.css';
 import {routerRedux} from 'dva/router'
 const Messages = ({
@@ -20,6 +21,21 @@ const Messages = ({
         ...newQuery,
       },
     }));
+  }
+  const updateOpts = {
+    visible: messages.updateVisible,
+    title: "修改用户[" + messages.item.author + "]",
+    user: messages.item,
+    onCancel: () => {
+      dispatch({type: 'messages/modifyState', payload: {updateVisible: false}});
+    },
+    onUpdate: (values) => {
+      console.log(values);
+      dispatch({type: 'messages/saveOrUpdate', payload: values}).then(() => {
+        dispatch({type: 'messages/modifyState', payload: {updateVisible: false}});
+        handleRefresh();
+      });
+    }
   }
   const listOpts = {
     dataSource:messages.datas,
@@ -54,6 +70,7 @@ const Messages = ({
       <Button type="primary" icon="plus"onClick={handleAdd}>留言</Button>
       <ListMessage {...listOpts}/>
       {messages.addVisible && <AddModal{...addOpts} rowKey="id"/>}
+      {messages.updateVisible && <UpdateMessage {...updateOpts}/>}
     </div>
   );
 }
